@@ -1,8 +1,7 @@
 import string
 import re
+import matplotlib.colors as mc
 
-#msg="Hello world"
-#print(msg)
 
 #with open("dickens.txt", "r", encoding="utf-8", errors='ignore') as a_file:
     #file_contents = a_file.read()
@@ -14,49 +13,72 @@ num_words = print('Number of words in the text file :',len(open("dickens.txt").r
 #3
 #num_unique1 = print('Number of unique1 words in the text file :',len(set(open("text2.txt").read().split())))
 
+#3
+d = {}
+with open('dickens.txt') as f:
+    for line in f:
+        for word in re.findall(r'[\w]+', line.lower()):
+            #cword = re.sub('[-,;:" ".!()' '{-}/?]+', '', word)
+            d[word] = d.setdefault(word, 0) + 1
+            
+count=0
+for key in d.keys():
+    #for key in list(d.keys()):
+        if(d[key]==1):
+          count += 1
+print(count)
+
+#3
+# text = open("dickens.txt", "r")
+# mis = 0
+# d = dict()
+  
+# # Loop through each line of the file
+# for line in text:
+#     line = line.strip()
+#     line = line.lower()
+#     line = line.translate(line.maketrans("", "", string.punctuation))
+#     words = line.split(" ")
+  
+#     for word in words:
+#         if word in d:
+#             d[word] = d[word] + 1
+#         else:
+#             d[word] = 1
+            
+#     for key in list(d.keys()):
+#      if(d[key]==1):
+#         mis = mis + 1
+# print("The amount of unique words in the file:",mis)
+# #print(d)
+
 #5A
 from collections import Counter
 counter = Counter(open("dickens.txt").read().split())
 array= counter.most_common()
 print(array[0][0])
 
-"""
-sum_len_of_sentence = 0
+  
 
-
-total_count_of_sentences = open("dickens.txt").count('.')
-print('total sentences:    ', total_count_of_sentences)
-all_sentences = open("dickens.txt").split('.')
-print ("all_sentences", all_sentences)
-for sentence in all_sentences:
-   sum_len_of_sentence += len(sentence)
-avh_len_of_sentences = sum_len_of_sentence / total_count_of_sentences
-print('Total avg len:', avh_len_of_sentences)
-
-for sentence in all_sentences:
-  if max_len_of_sentences < len(sentence):
-     max_len_of_sentences = len(sentence)
-print('Max length of sentences is: ', max_len_of_sentences)
-
-"""
-my_dict={}
-
-for line in (open("dickens.txt")):
-#def find_uniq_words(line):
-    words = line.split()
-    line = line.lower().strip().split(" ")
-    for word in words:
-        cword = re.sub('[-,;:" ".!()' '{-}/?]+', '', word)
-        if cword in my_dict:
-            my_dict[cword] = my_dict[cword]+ 1
-        else:
-            my_dict[cword] = 1
-print (my_dict)
-"""         
-uniq_count2 = 2  
-for d in list(my_dict.keys()):
-         if my_dict.get(d) == 1:
-               uniq_count2 += 1
-
-print("find_uniq_words: ", uniq_count2)
-"""
+#8
+for key, val in d.items():
+    if key in mc.cnames:
+      print(key,':',val)
+      
+# #6
+# max_count = 0
+# temp_count_of_non_k_words = 0
+# for word in words:
+#     if "k" not in word:
+#         temp_count_of_non_k_words +=1
+#     else:
+#         if temp_count_of_non_k_words > max_count:
+#             max_count = temp_count_of_non_k_words
+#             temp_count_of_non_k_words = 0
+# if "k" not in words[-1]:
+#     if temp_count_of_non_k_words > max_count:
+#        temp_count_of_non_k_words > max_count 
+#     else:
+#        temp_count_of_non_k_words = 0
+        
+# print(max_count)
