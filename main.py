@@ -4,9 +4,6 @@ import matplotlib.colors as mc
 from collections import Counter
 
 
-
-#with open("dickens.txt", "r", encoding="utf-8", errors='ignore') as a_file:
-    #file_contents = a_file.read()
 #1
 num_lines = print('Number of lengths in the text file :',sum(1 for line in open("dickens.txt")))
 #2
