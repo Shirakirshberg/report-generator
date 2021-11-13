@@ -4,6 +4,9 @@ import matplotlib.colors as mc
 from collections import Counter
 
 
+
+#with open("dickens.txt", "r", encoding="utf-8", errors='ignore') as a_file:
+    #file_contents = a_file.read()
 #1
 num_lines = print('Number of lengths in the text file :',sum(1 for line in open("dickens.txt")))
 #2
@@ -27,7 +30,7 @@ for key in d.keys():
           count += 1
 print("The number of the unique words:", count)
 
-#3
+# #3
 # text = open("dickens.txt", "r")
 # mis = 0
 # d = dict()
@@ -93,20 +96,25 @@ for key, val in d.items():
     if key in mc.cnames:
       print(key,':',val)
       
-# #6
-# max_count = 0
-# temp_count_of_non_k_words = 0
-# for word in words:
-#     if "k" not in word:
-#         temp_count_of_non_k_words +=1
-#     else:
-#         if temp_count_of_non_k_words > max_count:
-#             max_count = temp_count_of_non_k_words
-#             temp_count_of_non_k_words = 0
-# if "k" not in words[-1]:
-#     if temp_count_of_non_k_words > max_count:
-#        temp_count_of_non_k_words > max_count 
-#     else:
-#        temp_count_of_non_k_words = 0
+#6
+max_count = 0
+for line in ("dickens.txt"):
+    line = line.strip()
+    line = line.lower()
+    line = line.translate(line.maketrans("", "", string.punctuation))
+    words = line.split(" ")
+temp_count_of_non_k_words = 0
+for word in words:
+    if "k" not in word:
+        temp_count_of_non_k_words +=1
+    else:
+        if temp_count_of_non_k_words > max_count:
+            max_count = temp_count_of_non_k_words
+            temp_count_of_non_k_words = 0
+if "k" not in words[-1]:
+      if temp_count_of_non_k_words > max_count:
+        max_count = temp_count_of_non_k_words 
+      else:
+        temp_count_of_non_k_words = 0
         
-# print(max_count)
+print(max_count)
