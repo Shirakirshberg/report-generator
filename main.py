@@ -3,24 +3,22 @@ import re
 import matplotlib.colors as mc
 from collections import Counter
 
-
-
-#with open("dickens.txt", "r", encoding="utf-8", errors='ignore') as a_file:
-    #file_contents = a_file.read()
 #1
-num_lines = print('Number of lengths in the text file :',sum(1 for line in open("dickens.txt")))
+num_lines = print('Number of lines in the text file :',sum(1 for line in open("dickens.txt")))
 #2
-num_words = print('Number of words in the text file :',len(open("dickens.txt").read().split(' ')))
-#3
-#num_unique1 = print('Number of unique1 words in the text file :',len(set(open("text2.txt").read().split())))
+num_words=0
+with open("dickens.txt", 'r') as f: 
+    for line in f: 
+        words = line.split() 
+        num_words += len(words) 
+print("Number of words in the text file :", num_words) 
 
 #3
 d = {}
 
 with open('dickens.txt') as f:
     for line in f:
-        for word in re.findall(r'[\w]+', line.lower()):
-            #cword = re.sub('[-,;:" ".!()' '{-}/?]+', '', word)
+        for word in re.findall(r'[\w]+', line.lower().strip()):
             d[word] = d.setdefault(word, 0) + 1
             
 count=0
@@ -35,7 +33,6 @@ print("The number of the unique words:", count)
 # mis = 0
 # d = dict()
   
-# # Loop through each line of the file
 # for line in text:
 #     line = line.strip()
 #     line = line.lower()
@@ -63,15 +60,15 @@ with open("dickens.txt", "r", encoding="utf-8", errors='ignore') as a_file:
     uniqnes = 0
     my_dict = {}
     sum_len_of_sentence = 0
-    file_contents = a_file.read()
-    #print('Total words:   ', len(file_contents.split()))
+    myfile = a_file.read()
+    #print('Total words:   ', len(myfile.split()))
 
     
     
-    total_count_of_sentences = file_contents.count('.')
-    print('total sentences:    ', total_count_of_sentences)
+    total_count_of_sentences = myfile.count('.')
+    #print('total sentences:    ', total_count_of_sentences)
     
-    all_sentences = file_contents.split('.')
+    all_sentences = myfile.split('.')
     # print ("all_sentences", all_sentences)
     for sentence in all_sentences:
         sum_len_of_sentence += len(sentence)
@@ -95,26 +92,34 @@ print("The colors in the text and their frequency:")
 for key, val in d.items():
     if key in mc.cnames:
       print(key,':',val)
-      
-#6
+  
+
+  #6
+with open("dickens.txt", "r", encoding="utf-8", errors='ignore') as a_file:
+ words =a_file.read().lower().split()
+#print(words)
 max_count = 0
-for line in ("dickens.txt"):
-    line = line.strip()
-    line = line.lower()
-    line = line.translate(line.maketrans("", "", string.punctuation))
-    words = line.split(" ")
+maxword = []
+tempcountwords = []
 temp_count_of_non_k_words = 0
+#[yes yes kol yes yes yes kol yes]
 for word in words:
     if "k" not in word:
         temp_count_of_non_k_words +=1
+        tempcountwords.append(word)
     else:
         if temp_count_of_non_k_words > max_count:
             max_count = temp_count_of_non_k_words
+            maxword = tempcountwords
+            tempcountwords = []
             temp_count_of_non_k_words = 0
 if "k" not in words[-1]:
       if temp_count_of_non_k_words > max_count:
-        max_count = temp_count_of_non_k_words 
+        max_count = temp_count_of_non_k_words
+        maxword = tempcountwords
+        tempcountwords = []
       else:
         temp_count_of_non_k_words = 0
-        
-print(max_count)
+        tempcountwords =[]
+print(' '.join(maxword))     
+  #print("The longest word sequence without k:", max_count)
