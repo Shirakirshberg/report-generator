@@ -28,28 +28,6 @@ for key in d.keys():
           count += 1
 print("The number of the unique words:", count)
 
-# #3
-# text = open("dickens.txt", "r")
-# mis = 0
-# d = dict()
-  
-# for line in text:
-#     line = line.strip()
-#     line = line.lower()
-#     line = line.translate(line.maketrans("", "", string.punctuation))
-#     words = line.split(" ")
-  
-#     for word in words:
-#         if word in d:
-#             d[word] = d[word] + 1
-#         else:
-#             d[word] = 1
-            
-#     for key in list(d.keys()):
-#      if(d[key]==1):
-#         mis = mis + 1
-# print("The amount of unique words in the file:",mis)
-# #print(d)
 
 #4
 with open("dickens.txt", "r", encoding="utf-8", errors='ignore') as a_file:
@@ -85,7 +63,6 @@ counter = Counter(open("dickens.txt").read().split())
 array= counter.most_common()
 print("The most common word in the text:", array[0][0])
 
-  
 
 #8
 print("The colors in the text and their frequency:")
@@ -94,15 +71,16 @@ for key, val in d.items():
       print(key,':',val)
   
 
-  #6
+#6
 with open("dickens.txt", "r", encoding="utf-8", errors='ignore') as a_file:
- words =a_file.read().lower().split()
-#print(words)
+#with open("dickens.txt", 'r') as a_file:
+     words = a_file.read().lower().split(" ")
+ 
 max_count = 0
 maxword = []
 tempcountwords = []
 temp_count_of_non_k_words = 0
-#[yes yes kol yes yes yes kol yes]
+
 for word in words:
     if "k" not in word:
         temp_count_of_non_k_words +=1
@@ -113,13 +91,7 @@ for word in words:
             maxword = tempcountwords
             tempcountwords = []
             temp_count_of_non_k_words = 0
-if "k" not in words[-1]:
-      if temp_count_of_non_k_words > max_count:
-        max_count = temp_count_of_non_k_words
-        maxword = tempcountwords
-        tempcountwords = []
-      else:
-        temp_count_of_non_k_words = 0
-        tempcountwords =[]
-print(' '.join(maxword))     
-  #print("The longest word sequence without k:", max_count)
+            
+
+print("The longest word sequence without k:", ' '.join(maxword))     
+#print("The length of the longest words sequence without k:", max_count)
